@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فتح كاميرا السيلفي</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; background-color: #f4f4f9; }
+        video { width: 100%; max-width: 400px; border: 5px solid #fff; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); background: #000; transform: scaleX(-1); } /* انعكاس المرآة للكاميرا الأمامية */
+        h2 { color: #333; }
+    </style>
+</head>
+<body>
+
+    <h2>مرحباً! الكاميرا الأمامية قيد التشغيل</h2>
+    <video id="video" autoplay playsinline></video>
+
+    <script>
+        async function startSelfieCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: "user" } 
+                });
+                const videoElement = document.getElementById('video');
+                videoElement.srcObject = stream;
+            } catch (err) {
+                alert("خطأ في الوصول للكاميرا الأمامية: " + err.name);
+            }
+        }
+
+        window.onload = startSelfieCamera;
+    </script>
+</body>
+</html>
